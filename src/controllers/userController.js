@@ -19,8 +19,6 @@ const MOCK_DATABASE = {
  * Lưu ý phải lưu vào biến môi trường ENV trong thực tế cho bảo mật.
  * Ở đây mình làm Demo thôi nên mới đặt biến const và giá trị random ngẫu nhiên trong code nhé.
  */
-const ACCESS_TOKEN_SECRET_SIGNATURE = "KBgJwUETt4HeVD05WaXXI9V3JnwCVP";
-const REFRESH_TOKEN_SECRET_SIGNATURE = "fcCjhnpeopVn2Hg1jG75MUi62051yL";
 
 const login = async (req, res) => {
   try {
@@ -42,13 +40,14 @@ const login = async (req, res) => {
 
     const accessToken = await JwtProvider.generateToken(
       userInfo,
-      REFRESH_TOKEN_SECRET_SIGNATURE,
-      "1h"
+      process.env.ACCESS_TOKEN_SECRET_SIGNATURE,
+      // "1h"
+      5
     );
 
     const refreshToken = await JwtProvider.generateToken(
       userInfo,
-      ACCESS_TOKEN_SECRET_SIGNATURE,
+      process.env.REFRESH_TOKEN_SECRET_SIGNATURE,
       "14 days"
     );
 

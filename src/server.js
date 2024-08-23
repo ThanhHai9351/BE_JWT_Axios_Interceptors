@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
 import { corsOptions } from "~/config/corsOptions";
 import { APIs_V1 } from "~/routes/v1/";
 
@@ -8,6 +9,7 @@ const START_SERVER = () => {
   // Init Express App
   const app = express();
 
+  dotenv.config();
   // Fix Cache from disk from ExpressJS
   app.use((req, res, next) => {
     res.set("Cache-Control", "no-store");
